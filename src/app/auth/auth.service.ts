@@ -6,7 +6,7 @@ import { TrainingService } from '../training/training.service';
 import { UIService } from '../shared/ui.service';
 import { SolicitudVuelo } from './model/solicitudvuelo';
 import 'rxjs/add/operator/map';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 
 @Injectable()
@@ -14,18 +14,14 @@ export class AuthService {
 
     private isAuthenticated = false;
     authChangue = new Subject<boolean>();
-
+    private readonly API_URL_SOLICITUD = '/api/v1/solicitud';
+    private readonly API_URL_LOGIN = '/api/login';
     constructor(
         private router: Router,
         private trainingService: TrainingService,
         private uiService: UIService,
         private http: HttpClient
     ) {}
-
-    private getHeaders(): HttpHeaders {
-      const headerOptions = new HttpHeaders({'Content-Type': 'application/json'});
-      return headerOptions;
-    }
 
     initAuthListener() {
         /*this.auth.authState.subscribe(user => {
@@ -43,33 +39,33 @@ export class AuthService {
     }
 
     generarSolicitud(solicitudVuelo: SolicitudVuelo) {
-      debugger;
-      const headers = this.getHeaders();
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
       const body = JSON.stringify(solicitudVuelo);
-      return this.http.post('http://localhost:8095/v1/solicitud', body, { headers }).map((res: any) => {
-        console.log(res);
+      this.http.post(this.API_URL_SOLICITUD, body, { headers: headers }).subscribe(data => {
+        console.log(data);
+        this.uiService.loadingStateChanged.next(true);
+        this.uiService.showSnackbar('Solicitud de vuelo creada con éxito', null, 3000);
+        },
+        (err: HttpErrorResponse) => {
+          this.uiService.loadingStateChanged.next(false);
+          this.uiService.showSnackbar('Error occurred. Details: ' + err.name + ' ' + err.message, null, 3000);
       });
     }
 
     login(authData: AuthData) {
-      debugger;
-        this.uiService.loadingStateChanged.next(true);
-        const headers = this.getHeaders();
+
         const body = JSON.stringify(authData);
-        return this.http.post('http://localhost:8095/login', body, { headers }).map((res: any) => {
-          console.log(res);
-          this.uiService.loadingStateChanged.next(false);
+        this.http.post(this.API_URL_LOGIN, body).subscribe((response: HttpResponse<any>) => {
+          console.log(response);
+          this.uiService.loadingStateChanged.next(true);
+          this.uiService.showSnackbar('Successfully added', null, 3000);
+          },
+          (err: HttpErrorResponse) => {
+            this.uiService.loadingStateChanged.next(false);
+            this.uiService.showSnackbar('Error occurred. Details: ' + err.name + ' ' + err.message, null, 3000);
         });
-        /*this.auth.auth
-            .signInWithEmailAndPassword(authData.email, authData.password)
-            .then(result => {
-                console.log(result);
-                this.uiService.loadingStateChanged.next(false);
-            })
-            .catch(error => {
-                this.uiService.loadingStateChanged.next(false);
-                this.uiService.showSnackbar(error.message, null, 3000);
-            });*/
     }
 
     logout() {

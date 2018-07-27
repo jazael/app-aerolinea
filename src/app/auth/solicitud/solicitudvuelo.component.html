@@ -1,0 +1,49 @@
+<section class="signup-form">
+    <h1 fxLayoutAlign="center center">Generar Solicitud de Vuelos</h1>
+
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+      <mat-form-field>
+        <input matInput placeholder="Ingrese sus nombres y apellidos" ngModel name="nombresolicitante" nombresolicitante required #nombresolicitanteInput="ngModel">
+        <mat-error *ngIf="nombresolicitanteInput.hasError('required')">El campo nombre del solicitante es obligatorio.</mat-error>
+        <mat-error *ngIf="!nombresolicitanteInput.hasError('required')">Nombre del solicitante no válido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="email" matInput placeholder="Digite su correo electrónico" ngModel name="email" email required #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.hasError('required')">El campo correo electrónico es obligatorio.</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">Correo electrónico no válido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de viaje" [min]="maxDate" ngModel name="fechaviaje" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Seleccione el lugar de Origen" ngModel name="origen" origen required #origenInput="ngModel">
+            <mat-option *ngFor="let origen of optionsOrigen" [value]="origen.name">
+              {{origen.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="origenInput.hasError('required')">El campo lugar de origen es obligatorio.</mat-error>
+        <mat-error *ngIf="!origenInput.hasError('required')">Lugar de origen no válido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Seleccione su destino" ngModel name="destino" destino required #destinoInput="ngModel">
+            <mat-option *ngFor="let destino of optionsDestino" [value]="destino.name">
+              {{destino.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="destinoInput.hasError('required')">El campo lugar de destino es obligatorio.</mat-error>
+        <mat-error *ngIf="!destinoInput.hasError('required')">Lugar de destino no válido.</mat-error>
+      </mat-form-field>
+
+      <mat-checkbox ngModel name="accept" required color="primary">Esta seguro de generar la solicitud de vuelo.</mat-checkbox>
+
+      <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Enviar Solicitud</button>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </form>
+  </section>
