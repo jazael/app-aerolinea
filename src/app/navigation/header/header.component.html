@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/">Los mejores destinos del mundo <i class="material-icons">flight_takeoff</i></a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+      <li *ngIf="!isAuth"><a routerLink="/solicitud">Reserva tu vuelo <i class="material-icons">flight</i></a></li>
+      <li *ngIf="!isAuth"><a routerLink="/login">Iniciar sesión <i class="material-icons">account_circle</i></a></li>
+      <li *ngIf="isAuth"><a routerLink="/training">Solicitudes</a></li>
+      <li *ngIf="isAuth"><a style="cursor:pointer" (click)="onLogout()">Cerrar sesión <i class="material-icons">vpn_key</i></a></li>
+    </ul>
+  </div>
+</mat-toolbar>
