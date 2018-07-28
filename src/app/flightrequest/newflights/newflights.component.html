@@ -1,1 +1,45 @@
-fsdfsdf
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.id}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="nombresolicitante">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.nombresolicitante}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="correoelectronico">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.correoelectronico}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaviaje">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.fechaviaje}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="origen">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.origen}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="destino">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.destino}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let flight">{{flight.state}}</mat-cell>
+  </ng-container>
+
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>

@@ -18,8 +18,6 @@ export class FlightrequestComponent implements OnInit, OnDestroy {
   constructor(private flightrequestService: FlightrequestService) { }
 
   ngOnInit() {
-    debugger;
-    this.flightrequestService.obtenerSolicitud();
   }
 
   ngOnDestroy() {

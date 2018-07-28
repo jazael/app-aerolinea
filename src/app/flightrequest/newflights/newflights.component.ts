@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatSort, MatPaginator } from '@angular/material';
 import { FlightrequestService } from '../flightrequest.service';
 import { Newflight } from '../model/newflight.model';
+import { NewflightDataSource } from '../datasource/newflights.datasource';
 
 @Component({
   selector: 'app-new-flights',
@@ -11,20 +12,18 @@ import { Newflight } from '../model/newflight.model';
 })
 export class NewflightsComponent implements OnInit {
 
-  displayedColumns = ['Per', 'name', 'duration', 'calories', 'state'];
-  dataSource = new MatTableDataSource<Newflight>();
-  private exChangedSubscription: Subscription;
-
-  @ViewChild(MatSort) sort: MatSort;
+  flight: Newflight;
+  dataSource: NewflightDataSource;
+  displayedColumns = ['id', 'nombresolicitante', 'correoelectronico', 'fechaviaje', 'origen', 'destino', 'state'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('input') input: ElementRef;
 
   constructor(private flightrequestService: FlightrequestService) { }
 
   ngOnInit() {
-    /*this.exChangedSubscription = this.solicitudesService.finishedexercisesChanged
-      .subscribe((exercises: SolicitudVuelo[]) => {
-        this.dataSource.data = exercises;
-      });*/
+    this.dataSource = new NewflightDataSource(this.flightrequestService);
+    this.dataSource.loadFlight(0, 5);
   }
 
 }
