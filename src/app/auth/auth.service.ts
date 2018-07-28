@@ -24,8 +24,8 @@ export class AuthService {
     ) {}
 
     initAuthListener() {
-        /*this.auth.authState.subscribe(user => {
-            if (user) {
+      this.uiService.loadingStateChanged.subscribe(logged => {
+            if (logged) {
                 this.isAuthenticated = true;
                 this.authChangue.next(true);
                 this.router.navigate(['/training']);
@@ -35,7 +35,7 @@ export class AuthService {
                 this.router.navigate(['/login']);
                 this.authChangue.next(false);
             }
-        });*/
+        });
     }
 
     generarSolicitud(solicitudVuelo: SolicitudVuelo) {
@@ -44,23 +44,23 @@ export class AuthService {
       });
       const body = JSON.stringify(solicitudVuelo);
       this.http.post(this.API_URL_SOLICITUD, body, { headers: headers }).subscribe(data => {
-        console.log(data);
-        this.uiService.loadingStateChanged.next(true);
-        this.uiService.showSnackbar('Solicitud de vuelo creada con éxito', null, 3000);
-        },
-        (err: HttpErrorResponse) => {
+        if (data) {
+          this.uiService.loadingStateChanged.next(true);
+          this.uiService.showSnackbar('Solicitud de vuelo creada con éxito', null, 3000);
+        }
+      },
+      (err: HttpErrorResponse) => {
           this.uiService.loadingStateChanged.next(false);
-          this.uiService.showSnackbar('Error occurred. Details: ' + err.name + ' ' + err.message, null, 3000);
+          this.uiService.showSnackbar('Ha ocurrido un error al generar la solicitud de vuelo', null, 3000);
+          console.log('Ha ocurrido un error. Detalle: ' + err.name + ' ' + err.message);
       });
     }
 
     login(authData: AuthData) {
-
         const body = JSON.stringify(authData);
-        this.http.post(this.API_URL_LOGIN, body).subscribe((response: HttpResponse<any>) => {
-          console.log(response);
+        this.http.post(this.API_URL_LOGIN, body).subscribe((response) => {
           this.uiService.loadingStateChanged.next(true);
-          this.uiService.showSnackbar('Successfully added', null, 3000);
+          this.uiService.showSnackbar('Credenciales correctas', null, 3000);
           },
           (err: HttpErrorResponse) => {
             this.uiService.loadingStateChanged.next(false);
@@ -69,7 +69,7 @@ export class AuthService {
     }
 
     logout() {
-        // this.auth.auth.signOut();
+      this.uiService.loadingStateChanged.next(false);
     }
 
     isAuth(): boolean {
