@@ -1,2 +1,2 @@
-# fitness-tracker
-Proyecto de monitoreo y rastreador fitness creado en Angular 5, Material Design y Firebase.
+# app-aerolinea
+Proyecto basado en spring boot, para la automatización y gestión de procesos de requisitos de vuelo dentro de una compañía

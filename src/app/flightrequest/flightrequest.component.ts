@@ -18,17 +18,11 @@ export class FlightrequestComponent implements OnInit, OnDestroy {
   constructor(private flightrequestService: FlightrequestService) { }
 
   ngOnInit() {
-    /*this.exerciseSubscription = this.flightrequestService.exercisesChanged.subscribe(
-      exercise => {
-        (exercise) ? this.ongoingTraining = true : this.ongoingTraining = false;
-      }
-    );*/
+    debugger;
+    this.flightrequestService.obtenerSolicitud();
   }
 
   ngOnDestroy() {
-    /*if (this.exerciseSubscription) {
-      this.exerciseSubscription.unsubscribe();
-    }*/
   }
 
 }
