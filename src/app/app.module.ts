@@ -13,6 +13,7 @@ import { UIService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
 import { FlightrequestService } from './flightrequest/flightrequest.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     AuthService,
     FlightrequestService,
-    UIService
+    UIService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
