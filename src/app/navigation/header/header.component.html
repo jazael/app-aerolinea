@@ -11,7 +11,7 @@
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
       <li *ngIf="!isAuth"><a routerLink="/solicitud">Reserva tu vuelo <i class="material-icons">flight</i></a></li>
       <li *ngIf="!isAuth"><a routerLink="/login">Iniciar sesión <i class="material-icons">account_circle</i></a></li>
-      <li *ngIf="isAuth"><a routerLink="/training">Solicitudes</a></li>
+      <li *ngIf="isAuth"><a routerLink="/flighrequest">Solicitudes</a></li>
       <li *ngIf="isAuth"><a style="cursor:pointer" (click)="onLogout()">Cerrar sesión <i class="material-icons">vpn_key</i></a></li>
     </ul>
   </div>

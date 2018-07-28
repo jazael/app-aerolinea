@@ -1,4 +1,3 @@
-import { FlightrequestService } from './flightrequest/flightrequest.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,6 +12,7 @@ import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
 import { UIService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
+import { FlightrequestService } from './flightrequest/flightrequest.service';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [

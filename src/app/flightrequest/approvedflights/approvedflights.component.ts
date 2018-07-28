@@ -9,7 +9,7 @@ import { Newflight } from '../model/newflight.model';
   templateUrl: './approvedflights.component.html',
   styleUrls: ['./approvedflights.component.css']
 })
-export class ApprovedflightsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ApprovedflightsComponent implements OnInit {
 
   displayedColumns = ['Per', 'name', 'duration', 'calories', 'state'];
   dataSource = new MatTableDataSource<Newflight>();
@@ -27,19 +27,19 @@ export class ApprovedflightsComponent implements OnInit, AfterViewInit, OnDestro
       });*/
   }
 
-  ngAfterViewInit() {
+  /*ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-  }
+  }*/
 
   doFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
   }
 
-  ngOnDestroy() {
+  /*ngOnDestroy() {
     if (this.exChangedSubscription) {
       this.exChangedSubscription.unsubscribe();
     }
-  }
+  }*/
 
 }

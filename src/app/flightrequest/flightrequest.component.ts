@@ -1,6 +1,8 @@
+import { Subject } from 'rxjs/Subject';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { FlightrequestService } from './flightrequest.service';
+import { Newflight } from './model/newflight.model';
 
 @Component({
   selector: 'app-flight-request',
@@ -10,13 +12,13 @@ import { FlightrequestService } from './flightrequest.service';
 export class FlightrequestComponent implements OnInit, OnDestroy {
 
   ongoingTraining = false;
-
+  exerciseChanged = new Subject<Newflight>();
   exerciseSubscription: Subscription;
 
   constructor(private flightrequestService: FlightrequestService) { }
 
   ngOnInit() {
-    /*this.exerciseSubscription = this.solicitudesService.exerciseChanged.subscribe(
+    /*this.exerciseSubscription = this.flightrequestService.exercisesChanged.subscribe(
       exercise => {
         (exercise) ? this.ongoingTraining = true : this.ongoingTraining = false;
       }
@@ -24,9 +26,9 @@ export class FlightrequestComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.exerciseSubscription) {
+    /*if (this.exerciseSubscription) {
       this.exerciseSubscription.unsubscribe();
-    }
+    }*/
   }
 
 }

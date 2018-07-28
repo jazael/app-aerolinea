@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { AuthData } from './auth-data.model';
-import { TrainingService } from '../training/training.service';
+import { FlightrequestService } from '../flightrequest/flightrequest.service';
 import { UIService } from '../shared/ui.service';
 import { SolicitudVuelo } from './model/solicitudvuelo';
 import 'rxjs/add/operator/map';
@@ -18,7 +18,7 @@ export class AuthService {
     private readonly API_URL_LOGIN = '/api/login';
     constructor(
         private router: Router,
-        private trainingService: TrainingService,
+        private flightrequestService: FlightrequestService,
         private uiService: UIService,
         private http: HttpClient
     ) {}
@@ -28,9 +28,9 @@ export class AuthService {
             if (logged) {
                 this.isAuthenticated = true;
                 this.authChangue.next(true);
-                this.router.navigate(['/training']);
+                this.router.navigate(['/flightrequest']);
             } else {
-                this.trainingService.cancelSubscriptions();
+                // this.flightrequestService.cancelSubscriptions();
                 this.isAuthenticated = false;
                 this.router.navigate(['/login']);
                 this.authChangue.next(false);
