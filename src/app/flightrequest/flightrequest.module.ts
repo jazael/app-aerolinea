@@ -5,16 +5,22 @@ import { SharedModule } from '../shared/shared.module';
 import { NewflightsComponent } from './newflights/newflights.component';
 import { FlightrequestRoutingModule} from './flightrequest-routing.module';
 import { ApprovedflightsComponent } from './approvedflights/approvedflights.component';
+import { AcceptflightrequestComponent } from './newflights/acceptflightrequest.component';
 
 @NgModule({
     declarations: [
       FlightrequestComponent,
       NewflightsComponent,
-      ApprovedflightsComponent
+      ApprovedflightsComponent,
+      AcceptflightrequestComponent
     ],
     imports: [
-        SharedModule,
-        FlightrequestRoutingModule
+      SharedModule,
+      FlightrequestRoutingModule
+    ],
+    exports: [],
+    entryComponents: [
+      AcceptflightrequestComponent
     ]
 })
 

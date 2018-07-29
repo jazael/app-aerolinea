@@ -62,7 +62,8 @@ export class AuthService {
           },
           (err: HttpErrorResponse) => {
             this.uiService.loadingStateChanged.next(false);
-            this.uiService.showSnackbar('Error occurred. Details: ' + err.name + ' ' + err.message, null, 3000);
+            console.log('Ha ocurrido un error. Detalle: ' + err.name + ' ' + err.message);
+            this.uiService.showSnackbar('Estimado usuario sus credenciales son incorrectas, por favor verificar', null, 3000);
         });
     }
 

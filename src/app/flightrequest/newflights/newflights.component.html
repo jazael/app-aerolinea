@@ -43,6 +43,18 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>Acción</mat-header-cell>
+    <mat-cell *matCellDef="let flight">
+      <div class="p-5 icon-box" fxFlex.gt-sm="33.33" fxFlex.gt-xs="33.33" fxFlex="100">
+        <a rel="tooltip" title="Aprovar solicitud de vuelo" style="cursor: pointer;" (click)="openDialog(flight.id, flight.nombresolicitante, flight.destino)">
+            <mat-icon color="primary">send</mat-icon>
+        </a>
+      </div>
+    </mat-cell>
+   </ng-container>
+
+
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 

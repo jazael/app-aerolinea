@@ -1,7 +1,7 @@
 <mat-nav-list>
     <a *ngIf="!isAuth" mat-list-item routerLink="/solicitud" (click)="onClose()">
-        <mat-icon class="mat-18">face</mat-icon>
-        <span class="nav-caption">Regístrate</span>
+        <i class="material-icons">flight</i>
+        <span class="nav-caption">Reserva tu vuelo</span>
     </a>
     <a *ngIf="!isAuth" mat-list-item routerLink="/login" (click)="onClose()">
         <mat-icon class="mat-18">input</mat-icon>
@@ -9,7 +9,7 @@
     </a>
     <a *ngIf="isAuth" mat-list-item routerLink="/flightrequest" (click)="onClose()">
         <mat-icon class="mat-18">fitness_center</mat-icon>
-        <span class="nav-caption">Formación</span>
+        <span class="nav-caption">Solicitudes</span>
     </a>
     <mat-list-item>
         <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
