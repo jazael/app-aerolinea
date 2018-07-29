@@ -30,7 +30,6 @@ export class AuthService {
                 this.authChangue.next(true);
                 this.router.navigate(['/flightrequest']);
             } else {
-                // this.flightrequestService.cancelSubscriptions();
                 this.isAuthenticated = false;
                 this.router.navigate(['/login']);
                 this.authChangue.next(false);
@@ -45,12 +44,11 @@ export class AuthService {
       const body = JSON.stringify(solicitudVuelo);
       this.http.post(this.API_URL_SOLICITUD, body, { headers: headers }).subscribe(data => {
         if (data) {
-          this.uiService.loadingStateChanged.next(true);
           this.uiService.showSnackbar('Solicitud de vuelo creada con éxito', null, 3000);
+          this.router.navigate(['/']);
         }
       },
       (err: HttpErrorResponse) => {
-          this.uiService.loadingStateChanged.next(false);
           this.uiService.showSnackbar('Ha ocurrido un error al generar la solicitud de vuelo', null, 3000);
           console.log('Ha ocurrido un error. Detalle: ' + err.name + ' ' + err.message);
       });

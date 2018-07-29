@@ -10,36 +10,43 @@
   </ng-container>
 
   <ng-container matColumnDef="nombresolicitante">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Persona solicitante</mat-header-cell>
     <mat-cell *matCellDef="let flight">{{flight.nombresolicitante}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="correoelectronico">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Correo eléctronico</mat-header-cell>
     <mat-cell *matCellDef="let flight">{{flight.correoelectronico}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="fechaviaje">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Viaje</mat-header-cell>
     <mat-cell *matCellDef="let flight">{{flight.fechaviaje}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="origen">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Lugar de origen</mat-header-cell>
     <mat-cell *matCellDef="let flight">{{flight.origen}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="destino">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Lugar de destino</mat-header-cell>
     <mat-cell *matCellDef="let flight">{{flight.destino}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="state">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
-    <mat-cell *matCellDef="let flight">{{flight.state}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+    <mat-cell *matCellDef="let flight">
+      <mat-chip-list>
+        <mat-chip color="primary" selected>{{ flight.state }}</mat-chip>
+      </mat-chip-list>
+    </mat-cell>
   </ng-container>
 
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
 </mat-table>
+
+<mat-paginator [length]="length" [pageSize]="5"
+                   [pageSizeOptions]="[10, 15, 20]" (page)="pageEvent = $event; onPaginateChange($event)"></mat-paginator>
